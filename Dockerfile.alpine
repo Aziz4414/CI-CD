@@ -1,0 +1,16 @@
+#TD2 v1
+
+FROM alpine:3.15
+
+WORKDIR /app
+
+RUN apk add --update nodejs npm procps
+RUN adduser -D node
+COPY package*.json ./
+
+RUN npm install
+COPY . .
+RUN npm run build
+USER node
+
+CMD ["npm", "start"]

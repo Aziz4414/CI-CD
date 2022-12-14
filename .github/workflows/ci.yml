@@ -1,0 +1,28 @@
+#TD4
+
+on: [push]
+name: ACI_Workflow
+
+jobs:
+    Build-Deploy-ACI-:
+        runs-on: ubuntu-latest
+        steps:
+        # checkout the repo
+        - name: 'Checkout GitHub Action'
+          uses: actions/checkout@master
+          
+        - name: 'Login via Azure CLI'
+          uses: azure/login@v1
+          with:
+            creds: ${{ secrets.AZURE_CREDENTIALS }}
+       
+        -  name: 'Deploy ACI'
+           uses: 'azure/aci-deploy@v1'
+           with:
+            resource-group: ACI-rg
+            dns-name-label: aci-info
+            image: elmerzouki/sysinfo-api:0.0.2 #votre image
+            cpu: 1   #Optional
+            memory: 0.1   #Optional
+            name: sys-aci
+            location: 'france central'

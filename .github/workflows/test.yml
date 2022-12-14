@@ -1,0 +1,42 @@
+#TD3
+
+name: Github-Action_Workflow
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  run-install:
+    name: Run Install
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+          cache: 'npm'
+          cache-dependency-path: package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+  run-action:
+    name: Run Action
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v2
+        with:
+         node-version: 16.x
+
+      - name: Build
+        run: npm ci
+      -  run: npm run build
+
+      - name: Run my test
+        run: npm run test
