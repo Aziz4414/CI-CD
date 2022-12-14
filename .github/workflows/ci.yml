@@ -7,7 +7,7 @@ jobs:
     Build-Deploy-ACI-:
         runs-on: ubuntu-latest
         steps:
-        # checkout the repo github
+        # checkout the repo
         - name: 'Checkout GitHub Action'
           uses: actions/checkout@master
           
