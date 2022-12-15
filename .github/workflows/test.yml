@@ -1,6 +1,6 @@
 #TD3
 
-name: Github-Action_Workflow
+name: Github-Action_Workflow_CI/CD
 on:
   push:
     branches:
